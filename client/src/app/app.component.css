@@ -3,3 +3,95 @@
   height: 100%;
   box-sizing: border-box;
 } 
+.mat-button-right{
+  position: absolute;
+}
+.mat-button-position{
+  position: absolute;
+  
+}
+.mat-icon,.countrypicker{
+  margin-right: 10px;
+}
+.topnav-right {
+  float: right;
+}
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+.empty-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+[_nghost-c5] {
+  display: inline-block !important;
+  width: 100%;
+}
+.mat-tab-link-active,
+.mat-tab-label-active {
+  background-color: #5EADB0;
+  color: #D5FEFF;
+  border: 1px solid #6B7F7F;
+  font-weight: bold;
+}
+.mat-tab-link,
+.mat-tab-label {
+  line-height: 30px !important;
+  height: 30px !important;
+  min-width: 100px !important;
+  border: 1px solid #7e7e7e;
+}
+.tabContentContainer {
+  border: 1px solid #aaaaaa;
+  background: #ffffff 50% 50% repeat-x;
+}
+.online {
+  height: 10px;
+  width: 10px;
+  background-color:green;
+  border-radius: 50%;
+  display: inline-block;
+}
+.offline {
+  height: 10px;
+  width: 10px;
+  background-color:red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.member_list {
+  height: 380px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.member_list ul {
+  border: 1px solid #dddddd;
+}
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+.member_list li {
+  border-bottom: 1px solid #dddddd;
+  padding: 6px;
+}
+.pull-left {
+  float: left!important;
+}
+.chat-img img {
+  height: 34px;
+  width: 34px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+img {
+  vertical-align: middle;
+}
+img {
+  border: 0;
+}

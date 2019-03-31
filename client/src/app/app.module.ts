@@ -6,6 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChatModule } from './chat/chat.module';
 import { SharedModule } from './shared/shared.module';
+import { UserProfileComponent } from './chat/user-profile/user-profile.component';
+import { ChatService } from './chat.service';
+import { MatTabsModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,9 +21,15 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     ChatModule,
-    SharedModule
+    SharedModule,
+    MatTabsModule,
+    HttpClientModule,
+    FormsModule
+
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [UserProfileComponent],
+  providers: [ChatService],
+  bootstrap: [AppComponent,],
+  
 })
 export class AppModule { }

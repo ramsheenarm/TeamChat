@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{params.title}}</h2>
+
+
+<mat-dialog-content>
+  <mat-card class="example-card">
+  
+        <mat-card-header>
+          <mat-icon>more_vert</mat-icon>
+          <img mat-list-avatar class="avatar-card" [src]="params.avatar">
+          <mat-card-title>First Name: {{params.username}}</mat-card-title>
+          <mat-card-subtitle>Last Name: {{params.lastname}}</mat-card-subtitle>
+          <mat-card-title>Country Code: {{params.countrycode}}</mat-card-title>
+          <mat-card-subtitle>Flag: <img class="mat-icon" src="{{params.flag}}"></mat-card-subtitle>
+          <mat-card-subtitle>Phone: {{params.telphoneno}}</mat-card-subtitle>
+
+        </mat-card-header>
+      </mat-card>
+  
+</mat-dialog-content>
+
+<mat-dialog-actions *ngIf="params?.typeDialog === 'new-user'" [attr.align]="'end'">
+  <button mat-raised-button color="primary" mat-dialog-close (click)="onSave()" [disabled]="usernameFormControl.hasError('required')">Chat!</button>
+</mat-dialog-actions>
+
+<mat-dialog-actions *ngIf="params?.typeDialog === 'edit-user'" [attr.align]="'end'">
+  <button mat-button mat-dialog-close color="secondary">Close</button>
+  <button mat-raised-button color="primary" mat-dialog-close (click)="onSave()">Save</button>
+</mat-dialog-actions>

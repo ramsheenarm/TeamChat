@@ -1,27 +1,60 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #sidenav>
     <mat-nav-list>
-      <a mat-list-item href="https://luixaviles.com" target="_blank">
-        <mat-icon mat-list-icon>person</mat-icon>
-        <span mat-line>Author</span>
+      <a mat-list-item href="" target="_blank">
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+        <span mat-line>Dashboard</span>
       </a>
-      <a mat-list-item href="https://github.com/luixaviles/socket-io-typescript-chat" target="_blank">
-        <mat-icon mat-list-icon>code</mat-icon>
-        <span mat-line>Source Code</span>
+      <a mat-list-item href="" target="_blank">
+        <mat-icon mat-list-icon>group</mat-icon>
+        <span mat-line>Users</span>
       </a>
-      <a mat-list-item href="https://medium.com/dailyjs/real-time-apps-with-typescript-integrating-web-sockets-node-angular-e2b57cbd1ec1" target="_blank">
-        <mat-icon mat-list-icon>web</mat-icon>
-        <span mat-line>Blog Post</span>
-      </a>
+      <mat-list-item  (click)="onClickChatUser()">
+        <mat-icon mat-list-icon>chat</mat-icon>
+        <span mat-line>Team chat
+        </span>
+      </mat-list-item>
+      <div *ngIf="clickstatus" class="member_list">
+      <ul class="list-unstyled">
+         
+        <li class="left clearfix" *ngFor="let user of activeUsers">
+            <span  [ngClass]="user.active ? 'online' : 'offline'"></span>
+            <span class="chat-img pull-left">
+                
+            <img src="{{user.avatar}}" alt="User Avatar" class="img-circle">
+            </span>
+            <div class="chat-body clearfix">
+               <div class="header_sec">
+                  <strong class="primary-font">{{user.name}}</strong> 
+               </div>
+               
+            </div>
+         </li>
+        </ul>
+      </div>
     </mat-nav-list>
-  </mat-sidenav>
+   </mat-sidenav>
 
   <div>
     <mat-toolbar color="primary">
       <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-      <span>Typescript Chat</span>
+      <span>Team Chat</span>
+      <span class="empty-space"></span>
+    <mat-icon (click)="onClickUserInfo()">account_circle
+    </mat-icon>
+    <mat-icon>view_module</mat-icon>
+    <mat-icon>search</mat-icon>
+    <select [(ngModel)]="selectedCountry" (ngModelChange)="onSelect($event)" 
+    class="selectpicker countrypicker form-control " data-flag="true" id="country">
+      <option *ngFor="let Country of country; let i = index" [value]="i"> 
+        {{Country.name}}</option>
+        </select>
+        <img class="mat-icon material-icons" src="{{user.flag}}">
+        <mat-icon>call</mat-icon>
+        <span>{{user.countrycode}}-{{user.telphoneno}}</span>
+    <mat-icon>chat</mat-icon>
     </mat-toolbar>
 
     <div class="app-content">

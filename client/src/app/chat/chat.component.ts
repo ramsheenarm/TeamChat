@@ -8,6 +8,8 @@ import { User } from './shared/model/user';
 import { SocketService } from './shared/services/socket.service';
 import { DialogUserComponent } from './dialog-user/dialog-user.component';
 import { DialogUserType } from './dialog-user/dialog-user-type';
+import { ChatService } from 'app/chat.service';
+import { validateConfig } from '@angular/router/src/config';
 
 
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
@@ -20,6 +22,7 @@ const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 export class ChatComponent implements OnInit, AfterViewInit {
   action = Action;
   user: User;
+  activeUsers:User[];
   messages: Message[] = [];
   messageContent: string;
   ioConnection: any;
@@ -38,7 +41,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   // getting a reference to the items/messages within the list
   @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<MatListItem>;
 
-  constructor(private socketService: SocketService,
+  constructor(private socketService: SocketService, private chatService: ChatService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -47,6 +50,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.openUserPopup(this.defaultDialogUserParams);
     }, 0);
+
   }
 
   ngAfterViewInit(): void {
@@ -70,6 +74,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.user = {
       id: randomId,
       avatar: `${AVATAR_URL}/${randomId}.png`
+      
     };
   }
 
@@ -91,6 +96,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         console.log('disconnected');
       });
+
+
+      this.socketService.getUsers().subscribe(() => {
+        console.log(x=>this.activeUsers = x);
+      });
+
   }
 
   private getRandomId(): number {
@@ -101,6 +112,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.openUserPopup({
       data: {
         username: this.user.name,
+        lastname: this.user.lastname,
         title: 'Edit Details',
         dialogType: DialogUserType.EDIT
       }
@@ -109,12 +121,18 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   private openUserPopup(params): void {
     this.dialogRef = this.dialog.open(DialogUserComponent, params);
+   
     this.dialogRef.afterClosed().subscribe(paramsDialog => {
       if (!paramsDialog) {
         return;
       }
-
+      
+      
+    
+      this.user = this.chatService.getValue();
       this.user.name = paramsDialog.username;
+      
+      this.chatService.setValue(this.user);
       if (paramsDialog.dialogType === DialogUserType.NEW) {
         this.initIoConnection();
         this.sendNotification(paramsDialog, Action.JOINED);
