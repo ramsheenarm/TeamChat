@@ -12,6 +12,7 @@ This repository contains server & client side code using
 In order to start the project use:
 
 $ git clone https://github.com/ramsheenarm/TeamChat.git
+
 $ cd team-chat
 
 
